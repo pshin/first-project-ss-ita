@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="css/preview.css" type="text/css" media="screen, projection" />
 	<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->
   
-  <script src="js/model.js"></script>
-  <script src="js/controller.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/main_controller.js"></script>
   
   <script src="js/education.js"></script>
-  <script src="js/controller_education.js"></script>
+  <script src="js/education_controller.js"></script>
   <script src="js/family.js"></script>
-  <script src="js/controller_family.js"></script>
+  <script src="js/family_controller.js"></script>
   <script src="js/menu_add_js.js"></script>
 	<script src="js/init.js"></script> 
 </head>
@@ -108,7 +108,8 @@
 					</tr>				
 				</table>
 				</br>
-				<input type="button" value="Обрати фото" id="button_photo" class="button"></br></br>
+                    <canvas id="canvas" width="500" height="500"> </canvas>
+                    <input type="file" id="button_photo" class="button" name="files" accept="image" required="required" title="Необходимо выбрать один файл" />
 				</div>
 				
 				

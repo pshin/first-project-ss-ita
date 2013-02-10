@@ -9,18 +9,23 @@ function MainController() {
   this.init = function () {
     controller_education.init();
     controller_family.init();
+
+
+
+
+
     self_controller.hash = {"inputs":{"1":[last_name, first_name, patronymic, day_birth, month_birth,
                                       year_birth, citizen, INN, sex, pasport_series, pasport_number, pasport_issued, date],
                                       "2":[education],
                                       "4":[last_job, job_degree, leave, pension, family],
                                       "5":[partmen, pasport_partmen] },
                           "checkboxes":{ "1":[army],
-                                         "3":[aspirant, aduktur, doctor] },
+                                         "3":[aspirant, aduktur, doctor] }/*,
 
                           "models":{ "2":{ "model":"education_model", "set":1  },
                                      "3":{ "model":"post_education_model", "set":2 },
                                      "4":{ "model":"family_model", "set":controller_family.getFamilyModel }
-                          }
+                          }   */
     }
   }
 
@@ -35,15 +40,19 @@ function MainController() {
           case "inputs" :
             console.log(hash[controls][previous_tab][element].id,
               hash[controls][previous_tab][element].value);
+            card.setValue(hash[controls][previous_tab][element].id,
+              hash[controls][previous_tab][element].value);
             break;
           case "checkboxes" :
             console.log(hash[controls][previous_tab][element].id,
               hash[controls][previous_tab][element].checked);
+            card.setValue(hash[controls][previous_tab][element].id,
+              hash[controls][previous_tab][element].checked);
             break;
-          case "models" :
+/*          case "models" :
             console.log(hash[controls][previous_tab]["model"],
               hash[controls][previous_tab]["set"]());
-            break;
+            break;   */
         }
 
       }
@@ -51,6 +60,37 @@ function MainController() {
 
     previous_tab = current_tab;
   }
+
+
+ this.dataModelToCard = function (current_tab) {
+   var hash = self_controller.hash;
+   for (controls in hash) {
+     for (element in hash[controls][current_tab]) {
+       switch (controls) {
+         case "inputs" :
+           curr = card.getValue(hash[controls][current_tab][element].id);
+           if (curr !=undefined) {
+            hash[controls][current_tab][element].value = curr;
+            console.log("get"  + curr);
+           }
+           break;
+         case "checkboxes" :
+           curr = card.getValue(hash[controls][current_tab][element].id);
+           if (curr !=undefined)   {
+             hash[controls][current_tab][element].checked = curr;
+             console.log( "get" + curr);
+           }
+           break;
+/*         case "models" :
+           console.log(hash[controls][entering_tab]["model"],
+             hash[controls][entering_tab]["set"]());
+           break;      */
+       }
+
+     }
+ }
+ }
+
 
   this.render_model = function () {
     var inputs_key = ["r_last_name", "r_first_name", "r_patronymic", "day_birth", "month_birth", "r_year_birth",
@@ -125,3 +165,4 @@ function MainController() {
   }
 
 }
+
